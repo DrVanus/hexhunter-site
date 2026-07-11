@@ -212,11 +212,13 @@
     .btn-ghost:hover { background: var(--card-soft); border-color: var(--gold); color: var(--gold-bright); }
 
     .hero-art { position: relative; display: flex; justify-content: center; }
-    .hero-art img {
-      width: 100%; max-width: 300px; display: block;
-      border-radius: 28px;
+    .hero-art .device {
+      width: 100%; max-width: 274px; padding: 11px; display: block;
+      background: linear-gradient(160deg, #241b3a, #100b1b);
+      border-radius: 42px; border: 1px solid var(--border-strong);
       box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 0 1px var(--border-strong), 0 0 60px var(--violet-glow);
     }
+    .hero-art .device img { width: 100%; display: block; border-radius: 32px; }
     .hero-art::after {
       content: ''; position: absolute; inset: -20px;
       background: radial-gradient(ellipse at center, var(--violet-glow), transparent 68%);
@@ -430,7 +432,9 @@
           </div>
         </div>
         <div class="hero-art">
-          <img src="app-icon.png?v=20260711a" alt="Hexhunter app icon — a hooded huntress against an occult violet sigil">
+          <div class="device">
+            <img src="screenshot.jpg?v=20260711a" alt="The Hexhunter home screen on iPhone — a hooded huntress in the gothic dark above the 'Enter the Hunt' button, best time, essence, and heroes unlocked.">
+          </div>
         </div>
       </div>
     </div>
