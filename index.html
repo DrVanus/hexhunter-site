@@ -258,10 +258,12 @@
     .feature-card .glyph {
       width: 54px; height: 54px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      background: var(--card-soft); border: 1px solid var(--border-strong);
-      margin-bottom: 18px; color: var(--gold);
+      background: linear-gradient(150deg, rgba(240,216,117,0.20), rgba(212,175,55,0.06));
+      border: 1px solid rgba(212,175,55,0.40);
+      margin-bottom: 18px; color: var(--gold-bright);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.10), 0 8px 20px rgba(212,175,55,0.10);
     }
-    .feature-card .glyph svg { width: 27px; height: 27px; display: block; }
+    .feature-card .glyph svg { width: 27px; height: 27px; display: block; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.4)); }
     .feature-card h3 { font-weight: 700; font-size: 1.3rem; line-height: 1.2; margin-bottom: 10px; letter-spacing: 0.01em; }
     .feature-card p { color: var(--muted-fg); font-size: 0.98rem; }
     .feature-card .stat { display: block; margin-top: 14px; font-size: 0.82rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--gold); }
