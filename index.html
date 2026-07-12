@@ -225,6 +225,34 @@
       pointer-events: none; z-index: -1;
     }
 
+    /* Hero carousel — crossfades gameplay screenshots inside the phone frame. */
+    .hero-art .carousel {
+      position: relative; overflow: hidden;
+      border-radius: 32px; aspect-ratio: 620 / 1347;
+      background: #0C0A14;
+    }
+    .hero-art .carousel img {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover;
+      border-radius: 32px;
+      opacity: 0; transition: opacity 1s ease;
+      will-change: opacity;
+    }
+    .hero-art .carousel img.active { opacity: 1; }
+    .hero-art .carousel-column { display: flex; flex-direction: column; align-items: center; }
+    .carousel-dots { display: flex; justify-content: center; gap: 9px; margin-top: 20px; }
+    .carousel-dots button {
+      width: 8px; height: 8px; padding: 0; border: 0; cursor: pointer;
+      border-radius: 999px; background: rgba(167,139,250,0.28);
+      transition: width .3s ease, background .3s ease, box-shadow .3s ease;
+    }
+    .carousel-dots button:hover { background: rgba(167,139,250,0.55); }
+    .carousel-dots button.active {
+      width: 24px; background: var(--primary-bright);
+      box-shadow: 0 0 12px var(--violet-glow);
+    }
+    .carousel-dots button:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
+
     /* ===== SECTION ===== */
     section { position: relative; }
     .section-block { padding: 80px 0; }
@@ -471,8 +499,18 @@
           </div>
         </div>
         <div class="hero-art">
-          <div class="device">
-            <img src="screenshot.jpg?v=20260712a" alt="The Hexhunter home screen on iPhone — a hooded huntress in the gothic dark above the 'Enter the Hunt' button, showing an 8:32 best time, 1240 essence, and 5 of 8 heroes unlocked.">
+          <div class="carousel-column">
+            <div class="device">
+              <div class="carousel" id="heroCarousel" aria-roledescription="carousel" aria-label="Hexhunter gameplay screenshots">
+                <img class="active" fetchpriority="high" src="assets/screens/screen-home.jpg?v=20260712a" alt="The Hexhunter home screen — a hooded huntress in the gothic dark above the 'Enter the Hunt' button, showing an 8:32 best time, 1240 essence, and 5 of 8 heroes unlocked.">
+                <img src="assets/screens/screen-gameplay.jpg?v=20260712a" alt="Combat in the Ossuary — a hunter carving through a horde of skeletons at level 5.">
+                <img src="assets/screens/screen-gameplay2.jpg?v=20260712a" alt="A different hunter flooding the frozen Frostvault with hexes at level 6.">
+                <img src="assets/screens/screen-boss.jpg?v=20260712a" alt="Boss fight against the Ember Titan amid molten fire in the Ashlands.">
+                <img src="assets/screens/screen-draft.jpg?v=20260712a" alt="Level-up draft — choose one of three cards, with a Runestorm evolution ready to claim.">
+                <img src="assets/screens/screen-results.jpg?v=20260712a" alt="Run results — a new best of 447 seconds, 1286 slain, with Chain Lightning as MVP.">
+              </div>
+            </div>
+            <div class="carousel-dots" id="heroDots" role="tablist" aria-label="Choose a screenshot"></div>
           </div>
         </div>
       </div>
@@ -779,6 +817,65 @@
     </div>
     <div class="copyright">© 2026 HyperSage. Rated 9+ for fantasy violence. All hunts are optional; the dark is not.</div>
   </footer>
+
+  <!-- Hero carousel: crossfade + auto-rotate through gameplay screenshots.
+       Minimal vanilla JS, no dependencies. Respects reduced-motion. -->
+  <script>
+    (function () {
+      var carousel = document.getElementById('heroCarousel');
+      var dotsWrap = document.getElementById('heroDots');
+      if (!carousel || !dotsWrap) return;
+
+      var slides = Array.prototype.slice.call(carousel.querySelectorAll('img'));
+      if (slides.length < 2) return;
+
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var DELAY = 3600;
+      var i = 0, timer = null;
+
+      var dots = slides.map(function (_, idx) {
+        var b = document.createElement('button');
+        b.type = 'button';
+        b.setAttribute('role', 'tab');
+        b.setAttribute('aria-label', 'Show screenshot ' + (idx + 1) + ' of ' + slides.length);
+        b.addEventListener('click', function () { show(idx); restart(); });
+        dotsWrap.appendChild(b);
+        return b;
+      });
+
+      function show(n) {
+        slides[i].classList.remove('active');
+        dots[i].classList.remove('active');
+        dots[i].setAttribute('aria-selected', 'false');
+        i = (n + slides.length) % slides.length;
+        slides[i].classList.add('active');
+        dots[i].classList.add('active');
+        dots[i].setAttribute('aria-selected', 'true');
+      }
+
+      function next() { show(i + 1); }
+
+      function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+      function restart() {
+        stop();
+        if (!reduce) timer = setInterval(next, DELAY);
+      }
+
+      // Initial state
+      dots[0].classList.add('active');
+      dots[0].setAttribute('aria-selected', 'true');
+
+      if (!reduce) {
+        restart();
+        carousel.addEventListener('mouseenter', stop);
+        carousel.addEventListener('mouseleave', restart);
+        document.addEventListener('visibilitychange', function () {
+          if (document.hidden) stop(); else restart();
+        });
+      }
+    })();
+  </script>
 
 </body>
 </html>
