@@ -382,10 +382,7 @@
     .art-card .art-kind { font-family: 'Cinzel', serif; font-size: 0.66rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 3px; }
     .art-card .art-name { font-size: 1.06rem; font-weight: 700; color: var(--fg); letter-spacing: 0.01em; }
 
-    /* ===== SCREENS (device shots) ===== */
-    .screens-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 48px; }
-    @media (max-width: 820px) { .screens-grid { grid-template-columns: repeat(2, 1fr); gap: 22px; } }
-    @media (max-width: 440px) { .screens-grid { grid-template-columns: 1fr; max-width: 300px; margin-left: auto; margin-right: auto; } }
+    /* ===== DEVICE SHOTS (phone frames, reused across showcase sections) ===== */
     .screen-card { text-align: center; }
     .screen-frame {
       position: relative; border-radius: 26px; padding: 8px;
@@ -398,6 +395,54 @@
     .screen-frame img { width: 100%; display: block; border-radius: 19px; aspect-ratio: 620 / 1347; object-fit: cover; }
     .screen-kind { font-family: 'Cinzel', serif; font-size: 0.64rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin: 18px 0 3px; }
     .screen-name { font-size: 1.02rem; font-weight: 700; color: var(--fg); }
+
+    /* ===== SHOWCASE (dedicated feature sections, screenshot-driven) ===== */
+    .showcase { display: grid; grid-template-columns: 0.92fr 1.08fr; gap: 56px; align-items: center; }
+    .showcase.reverse .showcase-media { order: -1; }
+    .showcase-copy .section-eyebrow { margin-bottom: 12px; }
+    .showcase-copy h2 { font-weight: 800; font-size: clamp(1.9rem, 3.9vw, 2.7rem); line-height: 1.22; letter-spacing: 0.01em; margin-bottom: 14px; }
+    .showcase-copy h2 em { font-style: normal; color: var(--primary-bright); }
+    .showcase-copy h2 .gold { color: var(--gold); }
+    .showcase-copy p.lede { color: var(--muted-fg); font-size: 1.06rem; max-width: 520px; margin-bottom: 22px; }
+    .showcase-points { list-style: none; display: flex; flex-direction: column; gap: 11px; }
+    .showcase-points li { display: flex; gap: 12px; align-items: flex-start; color: var(--muted-fg); font-size: 0.98rem; line-height: 1.5; }
+    .showcase-points li b { color: var(--fg); font-weight: 600; }
+    .showcase-points li::before {
+      content: '✦'; color: var(--gold); flex: 0 0 auto; font-size: 0.9rem; line-height: 1.6;
+      filter: drop-shadow(0 0 8px var(--gold-glow));
+    }
+
+    /* A row of 2-3 phone frames beside the copy. Reuses .screen-card / .screen-frame. */
+    .phone-row { display: flex; justify-content: center; align-items: flex-end; gap: 18px; }
+    .phone-row .screen-card { flex: 1 1 0; min-width: 0; max-width: 224px; }
+    /* Gentle stagger so the frames read as a fanned arch, not a flat strip:
+       lift the middle frame of a 3-set (and the far frame of a 2-set). */
+    .phone-row.stagger .screen-card:nth-child(even) { transform: translateY(-20px); }
+    /* Single-phone showcases (e.g. Biomes) center one comfortably-sized frame. */
+    .phone-row.single { justify-content: center; }
+    .phone-row.single .screen-card { max-width: 268px; }
+    .phone-row .screen-frame img { aspect-ratio: 620 / 1347; }
+    .phone-row .screen-kind { margin-top: 14px; }
+    .phone-row .screen-name { font-size: 0.94rem; }
+
+    @media (max-width: 900px) {
+      .showcase { grid-template-columns: 1fr; gap: 32px; }
+      .showcase .showcase-media, .showcase.reverse .showcase-media { order: 2; }
+      .showcase-copy { text-align: center; }
+      .showcase-copy p.lede { margin-left: auto; margin-right: auto; }
+      .showcase-points { max-width: 460px; margin: 0 auto; text-align: left; }
+      .phone-row { max-width: 520px; margin: 0 auto; }
+    }
+    @media (max-width: 460px) {
+      .phone-row { gap: 11px; }
+      .phone-row.stagger .screen-card:nth-child(even) { transform: none; }
+      .phone-row .screen-name { font-size: 0.82rem; }
+      .phone-row .screen-frame { padding: 6px; border-radius: 20px; }
+      .phone-row .screen-frame img { border-radius: 15px; }
+    }
+
+    /* Sub-grids that sit under a showcase intro keep their own top margin. */
+    .showcase-detail { margin-top: 56px; }
 
     /* ===== ABOUT ===== */
     .about-card {
@@ -462,20 +507,22 @@
       </div>
       <div class="links">
         <a href="#features">Features</a>
+        <a href="#combat">Combat</a>
         <a href="#heroes">Heroes</a>
         <a href="#biomes">Biomes</a>
-        <a href="#weapons">Weapons</a>
-        <a href="#screens">Screens</a>
-        <a href="#art">Art</a>
+        <a href="#weapons">Arsenal</a>
+        <a href="#bosses">Bosses</a>
         <a href="#download">Download</a>
       </div>
       <details class="mobile-menu">
         <summary aria-label="Open menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></summary>
         <div class="mobile-links">
           <a href="#features">Features</a>
+          <a href="#combat">Combat</a>
           <a href="#heroes">Heroes</a>
           <a href="#biomes">Biomes</a>
-          <a href="#weapons">Weapons</a>
+          <a href="#weapons">Arsenal</a>
+          <a href="#bosses">Bosses</a>
           <a href="#art">Art</a>
           <a href="#download">Download</a>
         </div>
@@ -556,13 +603,53 @@
     </div>
   </section>
 
-  <!-- ===== HEROES ===== -->
-  <section class="section-block panel" id="heroes">
+  <!-- ===== COMBAT ===== -->
+  <section class="section-block panel" id="combat">
     <div class="container">
-      <div class="section-eyebrow" style="text-align:center;">The Hunters</div>
-      <h2 style="text-align:center;">Eight ways to <em>face the dark.</em></h2>
-      <p class="lede" style="text-align:center; margin-left:auto; margin-right:auto;">Every hero rewrites the run — a passive, a stat identity, and a starting weapon that sets the whole build in motion. Start with Vess; earn the rest with essence.</p>
-      <div class="heroes-grid">
+      <div class="showcase">
+        <div class="showcase-copy">
+          <div class="section-eyebrow">The Hunt</div>
+          <h2>Kite the horde. <em>Hex from range.</em></h2>
+          <p class="lede">Your hexes fire on their own, auto-aiming into the dark — your one job is to keep moving. Weave through the swarm, funnel the horde into your bolts, and never let them close the gap.</p>
+          <ul class="showcase-points">
+            <li><b>One-thumb control</b> — drag to move; your arsenal aims itself.</li>
+            <li><b>Chain-lightning &amp; frost hexes</b> arc across packs from across the screen.</li>
+            <li><b>Positioning is everything</b> — get surrounded and the dark takes you.</li>
+          </ul>
+        </div>
+        <div class="showcase-media">
+          <div class="phone-row stagger">
+            <figure class="screen-card"><div class="screen-frame"><img src="shots/03-gameplay.jpg?v=20260717a" alt="The Huntress casting from open crypt floor as a bone spear streaks toward skeletons closing from range" loading="lazy"></div><figcaption><div class="screen-kind">Combat</div><div class="screen-name">Fire from range</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-gameplay2.jpg?v=20260717a" alt="Chain-lightning and frost hexes detonating across a swarm of skeletons at level 13, the hunter clear in the open" loading="lazy"></div><figcaption><div class="screen-kind">Combat</div><div class="screen-name">Hexes fill the dark</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="shots/05-gameplay2.jpg?v=20260717a" alt="The Huntress kiting across open ground while skeletons converge from every edge of the screen" loading="lazy"></div><figcaption><div class="screen-kind">Combat</div><div class="screen-name">Never stop moving</div></figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== HEROES ===== -->
+  <section class="section-block" id="heroes">
+    <div class="container">
+      <div class="showcase reverse">
+        <div class="showcase-copy">
+          <div class="section-eyebrow">The Hunters</div>
+          <h2>Eight ways to <em>face the dark.</em></h2>
+          <p class="lede">Pick your hunter in the loadout, then earn the rest with essence. Every hero rewrites the run — a passive, a stat identity, and a starting weapon that sets the whole build in motion. Start with Vess; unlock the other seven.</p>
+          <ul class="showcase-points">
+            <li><b>8 distinct hunters</b> — from the balanced Huntress to the kill-hungry Revenant.</li>
+            <li><b>Each shifts the whole build</b> with its own passive and starting weapon.</li>
+            <li><b>Unlock with essence</b> earned from every run into the dark.</li>
+          </ul>
+        </div>
+        <div class="showcase-media">
+          <div class="phone-row stagger">
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-lobby.jpg?v=20260717a" alt="The loadout screen with Vess the Huntress selected and the Ossuary chosen as the stage" loading="lazy"></div><figcaption><div class="screen-kind">Loadout</div><div class="screen-name">Pick your hunter</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-home.jpg?v=20260717a" alt="The Hexhunter home screen showing a 16:39 best time, 2340 essence, and 5 of 8 heroes unlocked" loading="lazy"></div><figcaption><div class="screen-kind">Roster</div><div class="screen-name">Unlock all eight</div></figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="heroes-grid showcase-detail">
         <div class="hero-card">
           <img class="portrait" src="assets/heroes/huntress.png" alt="Vess, the Huntress">
           <div class="name">Vess</div>
@@ -632,12 +719,26 @@
   </section>
 
   <!-- ===== BIOMES ===== -->
-  <section class="section-block" id="biomes">
+  <section class="section-block panel" id="biomes">
     <div class="container">
-      <div class="section-eyebrow">Where you'll die</div>
-      <h2>Three biomes. Three <span class="gold">nightmares.</span></h2>
-      <p class="lede">Each biome escalates the horde and pays out more essence for surviving it. Push deep enough in one and the next unlocks — with a boss that hits harder than the last.</p>
-      <div class="biomes-grid">
+      <div class="showcase">
+        <div class="showcase-copy">
+          <div class="section-eyebrow">The Descent</div>
+          <h2>Three biomes. Three <span class="gold">nightmares.</span></h2>
+          <p class="lede">Choose your descent from the loadout. Each biome throws a faster, tougher horde and pays out more essence for surviving it — push deep enough in one and the next unlocks, with a boss that hits harder than the last.</p>
+          <ul class="showcase-points">
+            <li><b>The Ossuary</b> — a bone-choked catacomb where every hunt begins.</li>
+            <li><b>The Frostvault</b> — a bitter, tougher horde that pays 40% more essence.</li>
+            <li><b>The Ashlands</b> — the deepest, deadliest hunt and the richest haul of all.</li>
+          </ul>
+        </div>
+        <div class="showcase-media">
+          <div class="phone-row single">
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-lobby2.jpg?v=20260717a" alt="Stage selection on the loadout screen with the Frostvault chosen, showing a +39% essence bonus" loading="lazy"></div><figcaption><div class="screen-kind">Descent</div><div class="screen-name">Choose your stage</div></figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="biomes-grid showcase-detail">
         <div class="biome-card">
           <div class="biome-img" style="background-image:url('assets/biomes/ossuary.png');"></div>
           <div class="biome-shade"></div>
@@ -672,12 +773,29 @@
     </div>
   </section>
 
-  <!-- ===== WEAPONS ===== -->
-  <section class="section-block panel weapons-band" id="weapons">
+  <!-- ===== WEAPONS & ITEMS ===== -->
+  <section class="section-block" id="weapons">
     <div class="container">
-      <div class="section-eyebrow">The Arsenal</div>
-      <h2>Combine, level, and <span class="gold">ascend.</span></h2>
-      <p class="lede" style="margin-left:auto; margin-right:auto;">Eighteen weapons, each with its own rhythm. Max one out with the right passive in your build and it evolves into an ascended form — the moment a run tips from survival into slaughter.</p>
+      <div class="showcase reverse">
+        <div class="showcase-copy">
+          <div class="section-eyebrow">The Arsenal</div>
+          <h2>Draft your build. <span class="gold">Ascend</span> your weapons.</h2>
+          <p class="lede">Every level, choose one of three cards — a new weapon, an upgrade, or an item that bends the run your way. Reroll or banish what you don't want, then max a weapon with its paired passive to evolve it into an ascended form.</p>
+          <ul class="showcase-points">
+            <li><b>18 weapons + 7 evolutions</b> — Runestorm, Supernova, Reaper's Round.</li>
+            <li><b>Items &amp; passives</b> like Lucky Charm and Swift Boots bend the odds.</li>
+            <li><b>Reroll &amp; banish</b> to sculpt the exact build you want.</li>
+          </ul>
+        </div>
+        <div class="showcase-media">
+          <div class="phone-row stagger">
+            <figure class="screen-card"><div class="screen-frame"><img src="shots/04-levelup.jpg?v=20260717a" alt="Level-up draft offering Cleaving Arc, an Arcane Bolt upgrade, and Bone Spear" loading="lazy"></div><figcaption><div class="screen-kind">Draft</div><div class="screen-name">Choose one</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-draft.jpg?v=20260716c" alt="Level-up draft offering the Nova Pulse weapon alongside the Lucky Charm and Swift Boots items" loading="lazy"></div><figcaption><div class="screen-kind">Items</div><div class="screen-name">Bend the run</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-results.jpg?v=20260717a" alt="Run results with a weapon MVP breakdown led by Arcane Bolt at 1,345 damage" loading="lazy"></div><figcaption><div class="screen-kind">Results</div><div class="screen-name">See your MVP</div></figcaption></figure>
+          </div>
+        </div>
+      </div>
+      <div class="weapons-band showcase-detail">
       <div class="weapon-chips">
         <span class="weapon-chip">Arcane Bolt</span>
         <span class="weapon-chip">Orbiting Blades</span>
@@ -710,48 +828,30 @@
         </div>
       </div>
       <p class="evo-note">Max a weapon with its paired passive and it <b>ascends</b> — brighter, wider, and lit in evolution gold.</p>
+      </div>
     </div>
   </section>
 
-  <!-- ===== SCREENS ===== -->
-  <section class="section-block panel" id="screens">
+  <!-- ===== BOSSES ===== -->
+  <section class="section-block panel" id="bosses">
     <div class="container">
-      <div class="section-eyebrow">Straight from the crypt</div>
-      <h2>See it <span class="gold">in your hand.</span></h2>
-      <p class="lede">One thumb, endless horde. Pick a hunter, dive into the dark, and draft your build between waves — captured live on device.</p>
-      <div class="screens-grid">
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-home.jpg?v=20260717a" alt="Hexhunter title screen showing a veteran player's best time, essence, and unlocked heroes" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Title</div><div class="screen-name">Enter the hunt</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-lobby.jpg?v=20260716c" alt="Loadout screen with Kael the Pyromancer selected" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Loadout</div><div class="screen-name">Pick your hunter</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-lobby2.jpg?v=20260716c" alt="Loadout screen with Maugrim the Gravewarden and the Frostvault stage" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Loadout</div><div class="screen-name">Choose your stage</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-gameplay.jpg?v=20260717a" alt="The Plague Abbot boss towering over the hunter mid-fight in the Ossuary, boss health bar full across the top" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Combat</div><div class="screen-name">Survive the horde</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-gameplay2.jpg?v=20260717a" alt="Chain-lightning and frost hexes detonating across a swarm of skeletons at level 13" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Combat</div><div class="screen-name">Hexes light up the dark</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-boss.jpg?v=20260712a" alt="Boss fight against the Ember Titan amid molten fire in the Ashlands" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Bosses</div><div class="screen-name">Face the titans</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-draft.jpg?v=20260716c" alt="Level-up draft card with a weapon evolution ready to claim" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Draft</div><div class="screen-name">Build your doom</div></figcaption>
-        </figure>
-        <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-results.jpg?v=20260717a" alt="Run results screen showing a new best of 146 seconds and 301 kills" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Results</div><div class="screen-name">Chase a new best</div></figcaption>
-        </figure>
+      <div class="showcase">
+        <div class="showcase-copy">
+          <div class="section-eyebrow">The Deep</div>
+          <h2>Something guards <span class="gold">the deep.</span></h2>
+          <p class="lede">Push far enough into a biome and its warden wakes — the Plague Abbot, the Frost Lich, the Ember Titan. A health bar stretches across the top, the screen fills with death, and the horde never stops. Outlast it for the richest haul of the run.</p>
+          <ul class="showcase-points">
+            <li><b>A boss per biome</b> — each one deadlier than the last.</li>
+            <li><b>Fight the boss and the horde at once</b> — no breathing room.</li>
+            <li><b>Survive the kill</b> for a surge of essence toward your next unlock.</li>
+          </ul>
+        </div>
+        <div class="showcase-media">
+          <div class="phone-row stagger">
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-gameplay.jpg?v=20260717a" alt="The Plague Abbot looming at the edge of the Ossuary, its boss health bar full across the top of the screen" loading="lazy"></div><figcaption><div class="screen-kind">Boss</div><div class="screen-name">The Plague Abbot</div></figcaption></figure>
+            <figure class="screen-card"><div class="screen-frame"><img src="assets/screens/screen-boss.jpg?v=20260712a" alt="Boss fight against the Ember Titan amid molten fire in the Ashlands" loading="lazy"></div><figcaption><div class="screen-kind">Boss</div><div class="screen-name">The Ember Titan</div></figcaption></figure>
+          </div>
+        </div>
       </div>
     </div>
   </section>
