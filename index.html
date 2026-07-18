@@ -212,8 +212,12 @@
     .btn-ghost:hover { background: var(--card-soft); border-color: var(--gold); color: var(--gold-bright); }
 
     .hero-art { position: relative; display: flex; justify-content: center; }
+    /* The column must carry the width: its only content (the carousel) is
+       absolutely-positioned images with no intrinsic size, so a shrink-to-fit
+       flex item would collapse to nothing without an explicit width. */
+    .hero-art .carousel-column { width: 100%; max-width: 372px; }
     .hero-art .device {
-      width: 100%; max-width: 300px; padding: 11px; display: block;
+      width: 100%; padding: 12px; display: block;
       background: linear-gradient(160deg, #241b3a, #100b1b);
       border-radius: 42px; border: 1px solid var(--border-strong);
       box-shadow: 0 30px 70px rgba(0,0,0,0.6), 0 0 0 1px var(--border-strong), 0 0 60px var(--violet-glow);
@@ -502,12 +506,12 @@
           <div class="carousel-column">
             <div class="device">
               <div class="carousel" id="heroCarousel" aria-roledescription="carousel" aria-label="Hexhunter gameplay screenshots">
-                <img class="active" fetchpriority="high" src="assets/screens/screen-home.jpg?v=20260716c" alt="The Hexhunter home screen — a hooded huntress in the gothic dark above the 'Enter the Hunt' button, showing an 8:32 best time, 1240 essence, and 5 of 8 heroes unlocked.">
-                <img src="assets/screens/screen-gameplay.jpg?v=20260716c" alt="Combat in the Ossuary — a hunter carving through a horde of skeletons at level 5.">
-                <img src="assets/screens/screen-gameplay2.jpg?v=20260716c" alt="A different hunter flooding the frozen Frostvault with hexes at level 6.">
+                <img class="active" fetchpriority="high" src="assets/screens/screen-home.jpg?v=20260717a" alt="The Hexhunter home screen — a hooded huntress in the gothic dark above the 'Enter the Hunt' button, showing a 16:39 best time, 2340 essence, and 5 of 8 heroes unlocked.">
+                <img src="assets/screens/screen-gameplay.jpg?v=20260717a" alt="Boss fight against the Plague Abbot in the Ossuary — the hunter carving through a horde at level 19 with the boss health bar full across the top.">
+                <img src="assets/screens/screen-gameplay2.jpg?v=20260717a" alt="Chain-lightning and frost hexes detonating across a swarm of skeletons at level 13.">
                 <img src="assets/screens/screen-boss.jpg?v=20260712a" alt="Boss fight against the Ember Titan amid molten fire in the Ashlands.">
                 <img src="assets/screens/screen-draft.jpg?v=20260716c" alt="Level-up draft — choose one of three cards, with a Runestorm evolution ready to claim.">
-                <img src="assets/screens/screen-results.jpg?v=20260716c" alt="Run results — a new best of 447 seconds, 1286 slain, with Chain Lightning as MVP.">
+                <img src="assets/screens/screen-results.jpg?v=20260717a" alt="Run results — a new best of 146 seconds, 301 slain, with Arcane Bolt topping the weapon breakdown as MVP.">
               </div>
             </div>
             <div class="carousel-dots" id="heroDots" role="tablist" aria-label="Choose a screenshot"></div>
@@ -717,7 +721,7 @@
       <p class="lede">One thumb, endless horde. Pick a hunter, dive into the dark, and draft your build between waves — captured live on device.</p>
       <div class="screens-grid">
         <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-home.jpg?v=20260716c" alt="Hexhunter title screen showing a veteran player's best time, essence, and unlocked heroes" loading="lazy"></div>
+          <div class="screen-frame"><img src="assets/screens/screen-home.jpg?v=20260717a" alt="Hexhunter title screen showing a veteran player's best time, essence, and unlocked heroes" loading="lazy"></div>
           <figcaption><div class="screen-kind">Title</div><div class="screen-name">Enter the hunt</div></figcaption>
         </figure>
         <figure class="screen-card">
@@ -729,12 +733,12 @@
           <figcaption><div class="screen-kind">Loadout</div><div class="screen-name">Choose your stage</div></figcaption>
         </figure>
         <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-gameplay.jpg?v=20260716c" alt="Vess the Huntress surrounded by a horde of skeletons in the Ossuary" loading="lazy"></div>
+          <div class="screen-frame"><img src="assets/screens/screen-gameplay.jpg?v=20260717a" alt="The Plague Abbot boss towering over the hunter mid-fight in the Ossuary, boss health bar full across the top" loading="lazy"></div>
           <figcaption><div class="screen-kind">Combat</div><div class="screen-name">Survive the horde</div></figcaption>
         </figure>
         <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-gameplay2.jpg?v=20260716c" alt="Ravenna the Witch on her broom fighting the horde in the frozen Frostvault" loading="lazy"></div>
-          <figcaption><div class="screen-kind">Combat</div><div class="screen-name">Every hero plays different</div></figcaption>
+          <div class="screen-frame"><img src="assets/screens/screen-gameplay2.jpg?v=20260717a" alt="Chain-lightning and frost hexes detonating across a swarm of skeletons at level 13" loading="lazy"></div>
+          <figcaption><div class="screen-kind">Combat</div><div class="screen-name">Hexes light up the dark</div></figcaption>
         </figure>
         <figure class="screen-card">
           <div class="screen-frame"><img src="assets/screens/screen-boss.jpg?v=20260712a" alt="Boss fight against the Ember Titan amid molten fire in the Ashlands" loading="lazy"></div>
@@ -745,7 +749,7 @@
           <figcaption><div class="screen-kind">Draft</div><div class="screen-name">Build your doom</div></figcaption>
         </figure>
         <figure class="screen-card">
-          <div class="screen-frame"><img src="assets/screens/screen-results.jpg?v=20260716c" alt="Run results screen showing a new best of 447 seconds and 1286 kills" loading="lazy"></div>
+          <div class="screen-frame"><img src="assets/screens/screen-results.jpg?v=20260717a" alt="Run results screen showing a new best of 146 seconds and 301 kills" loading="lazy"></div>
           <figcaption><div class="screen-kind">Results</div><div class="screen-name">Chase a new best</div></figcaption>
         </figure>
       </div>
