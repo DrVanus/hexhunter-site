@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hexhunter.app/sitemap.xml
+Sitemap: https://drvanus.github.io/hexhunter-site/sitemap.xml
